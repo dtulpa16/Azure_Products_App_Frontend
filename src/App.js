@@ -1,23 +1,25 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
+import { fetchProducts } from './Services/Api';
+import ProductCard from './Components/ProductCard';
+import AddProduct from './Components/AddProduct';
 import './App.css';
 
 function App() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetchProducts().then(res => {
+      setProducts(res.data);
+    });
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <h1>Products</h1>
+      <AddProduct />
+      {products.map(product => (
+        <ProductCard key={product.Id} product={product} />
+      ))}
     </div>
   );
 }
