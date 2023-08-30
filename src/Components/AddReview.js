@@ -5,7 +5,8 @@ function AddReview({ productId,setToggle,toggle }) {
   const [text, setText] = useState('');
   const [rating, setRating] = useState(1);
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault()
     postReview({
       Text: text,
       Rating: parseInt(rating),
