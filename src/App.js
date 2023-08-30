@@ -13,7 +13,7 @@ function App() {
     });
   }, []);
 
-  return (
+  return products && (
     <div className="app">
       <h1>Products</h1>
       <AddProduct />
